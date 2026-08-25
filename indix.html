@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document</title>
+<link rel="stylesheet" href="A6.css">
+</head>
+<body>
+
+<div class="welcome">
+<h1>به ماشین‌حساب گمرکی خوش آمدید</h1>
+<p>در حال آماده‌سازی...</p>
+</div>
+
+<header>
+</header>
+
+<header>
+<img class="m" src="images/bl.jpg" alt="عکس من" width="200" height="150">
+<h6>رویه ملوانی</h6>
+<h1 class="c">🇺🇸 دلار آمریکا (USD) 1,310,661</h1>
+</header>
+
+<input type="number" id="a" placeholder="ارزش کالا">
+<br><br>
+
+<input type="number" id="b" placeholder="حقوق ورودی">
+<br><br>
+
+<button onclick="multiply()">محاسبه</button>
+
+<div class="df">
+
+<div class="gh">
+<h1>:ارزش کالا</h1>
+<p id="h"></p>
+</div>
+
+<div class="cx">
+<h2>:حقوق ورودی</h2>
+<p id="result"></p>
+</div>
+
+<div class="lo">
+<h3>:ارزش افزوده</h3>
+<p id="f"></p>
+</div>
+
+<div class="x">
+<h4>:درصد هلال احمر</h4>
+<p id="s"></p>
+</div>
+
+<div class="x">
+<h5>: در هزار12</h5>
+<p id="k" class="v"></p>
+</div>
+
+<div class="l">
+<h1>:پسماند</h1>
+<p id="o" class="v"></p>
+</div>
+
+<div class="x">
+<h5>:عواض فرهنگی</h5>
+<p id="m" class="v"></p>
+</div>
+
+<div class="x">
+<h5>:عوارض ملوانی</h5>
+<p id="y" class="v"></p>
+</div>
+
+</div>
+
+<div id="items"></div>
+
+<div class="df">
+
+<h1>جمع کل اظهارنامه</h1>
+
+<div class="gh">
+<h1>:ارزش کالا</h1>
+<p id="totalH"></p>
+</div>
+
+<div class="cx">
+<h2>:حقوق ورودی</h2>
+<p id="totalResult"></p>
+</div>
+
+<div class="lo">
+<h3>:ارزش افزوده</h3>
+<p id="totalF"></p>
+</div>
+
+<div class="x">
+<h4>:درصد هلال احمر</h4>
+<p id="totalS"></p>
+</div>
+
+<div class="x">
+<h5>: در هزار12</h5>
+<p id="totalK"></p>
+</div>
+
+<div class="l">
+<h1>:پسماند</h1>
+<p id="totalO"></p>
+</div>
+
+<div class="x">
+<h5>:عواض فرهنگی</h5>
+<p id="totalM"></p>
+</div>
+
+<div class="x">
+<h5>:عوارض ملوانی</h5>
+<p id="totalY"></p>
+</div>
+
+</div>
+
+<script>
+let items=[];
+function multiply(){
+let a=Number(document.getElementById("a").value);
+let b=Number(document.getElementById("b").value);
+if(a<=0||b<0){alert("لطفاً اطلاعات قلم را وارد کنید");return;}
+let result=(a*1310661)*(b/100);
+let h=a*1310661;
+let f=(result+h)*(5/100);
+let s=result/100;
+let k=[(a*1310661)*12]/100000*20;
+let o=a*1310661*0.5/1000;
+let m=a*1310661*0.04*0.20;
+let y=result+f+k;
+document.getElementById("result").innerHTML=result.toLocaleString("en-US");
+document.getElementById("h").innerHTML=h.toLocaleString("en-US");
+document.getElementById("f").innerHTML=f.toLocaleString("en-US");
+document.getElementById("s").innerHTML=s.toLocaleString("en-US");
+document.getElementById("k").innerHTML=k.toLocaleString("en-US");
+document.getElementById("o").innerHTML=o.toLocaleString("en-US");
+document.getElementById("m").innerHTML=m.toLocaleString("en-US");
+document.getElementById("y").innerHTML=y.toLocaleString("en-US");
+items.push({h:h,result:result,f:f,s:s,k:k,o:o,m:m,y:y});
+let totalH=0,totalResult=0,totalF=0,totalS=0,totalK=0,totalO=0,totalM=0,totalY=0;
+for(let i=0;i<items.length;i++){
+totalH+=items[i].h;
+totalResult+=items[i].result;
+totalF+=items[i].f;
+totalS+=items[i].s;
+totalK+=items[i].k;
+totalO+=items[i].o;
+totalM+=items[i].m;
+totalY+=items[i].y;
+}
+document.getElementById("totalH").innerHTML=totalH.toLocaleString("en-US");
+document.getElementById("totalResult").innerHTML=totalResult.toLocaleString("en-US");
+document.getElementById("totalF").innerHTML=totalF.toLocaleString("en-US");
+document.getElementById("totalS").innerHTML=totalS.toLocaleString("en-US");
+document.getElementById("totalK").innerHTML=totalK.toLocaleString("en-US");
+document.getElementById("totalO").innerHTML=totalO.toLocaleString("en-US");
+document.getElementById("totalM").innerHTML=totalM.toLocaleString("en-US");
+document.getElementById("totalY").innerHTML=totalY.toLocaleString("en-US");
+let itemNumber=items.length;
+let itemBox=document.createElement("div");
+itemBox.className="df";
+itemBox.innerHTML="<h1>قلم "+itemNumber+"</h1>"+
+"<div class='gh'><h1>:ارزش کالا</h1><p>"+h.toLocaleString("en-US")+"</p></div>"+
+"<div class='cx'><h2>:حقوق ورودی</h2><p>"+result.toLocaleString("en-US")+"</p></div>"+
+"<div class='lo'><h3>:ارزش افزوده</h3><p>"+f.toLocaleString("en-US")+"</p></div>"+
+"<div class='x'><h4>:درصد هلال احمر</h4><p>"+s.toLocaleString("en-US")+"</p></div>"+
+"<div class='x'><h5>: در هزار12</h5><p>"+k.toLocaleString("en-US")+"</p></div>"+
+"<div class='l'><h1>:پسماند</h1><p>"+o.toLocaleString("en-US")+"</p></div>"+
+"<div class='x'><h5>:عواض فرهنگی</h5><p>"+m.toLocaleString("en-US")+"</p></div>"+
+"<div class='x'><h5>:عوارض ملوانی</h5><p>"+y.toLocaleString("en-US")+"</p></div>";
+document.getElementById("items").appendChild(itemBox);
+}
+</script>
+<div>
+<nav>
+<ul>
+<li>
+<button class="k">
+<a href="A1.html">اجرا</a>
+</button>
+</li>
+</ul>
+</nav>
+</div>
+
+<footer>
+
+<h1 class="c">
+نرخ به ریال<br>
+:us: دلار آمریکا (USD)
+1,310,661
+</h1><br>
+
+<hr>
+
+<h1 class="c">
+🇪🇺 یورو (EUR)
+1,551,964
+</h1><br>
+
+<hr>
+
+<h1 class="c">
+:cn: یوان چین (CNY)
+188,931
+</h1><br>
+
+<hr>
+
+<h1 class="c">
+🇦🇪 درهم امارات (AED)
+356,885
+</h1><br>
+
+<hr>
+<h1 class="c">
+نرخ ارز صادراتی دلار 1,476,255
+</h1><br>
+
+<hr>
+
+<h1 class="c">
+🇹🇷 لیر ترکیه (TRY)
+31,223
+</h1><br>
+
+<hr>
+
+<h1 class="c">
+🇷🇺 روبل روسیه (RUB)
+16,116
+</h1>
+
+<hr>
+
+<h1 class="c">
+نرخ تبدیل
+<br>
+یورو / دلار = 1.18
+<br>
+دلار / درهم=3.19
+<br>
+دلار / یوان =6.02
+<br>
+</h1>
+
+</footer>
+
+</body>
+</html>
